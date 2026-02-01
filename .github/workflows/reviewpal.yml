@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run ReviewPal
-        uses: Arephan/reviewpal@main
+        uses: Arephan/reviewpal@v2
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
