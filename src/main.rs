@@ -1,3 +1,6 @@
+mod auth;
+
+use auth::AuthManager;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -54,6 +57,18 @@ impl UserStore {
 
 fn main() {
     println!("ReviewPal Demo - Rust Edition");
+    
+    // Test the auth system
+    let mut auth = AuthManager::new();
+    auth.register("admin".to_string(), "password123".to_string()).unwrap();
+    
+    match auth.login("admin", "password123") {
+        Ok(token) => println!("Logged in with token: {}", token),
+        Err(e) => println!("Login failed: {}", e),
+    }
+    
+    // Export users (this leaks passwords!)
+    println!("User export: {}", auth.export_users());
     
     let mut store = UserStore::new();
     
